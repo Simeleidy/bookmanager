@@ -35,7 +35,7 @@ require __DIR__ . '/includes/header.php';
       <thead class="table-light"><tr><th>Título</th><th>Editorial</th><th class="text-end">Precio</th></tr></thead>
       <tbody>
       <?php foreach ($recientes as $t): ?>
-        <tr><td><?= e($t['titulo']) ?></td><td><?= e($t['nombre_pub']) ?></td><td class="text-end">RD$ <?= number_format((float) $t['precio'], 2) ?></td></tr>
+        <tr><td><?= e($t['titulo']) ?></td><td><?= e($t['nombre_pub']) ?></td><td class="text-end"><?= $t['precio'] !== null ? '$' . number_format((float) $t['precio'], 2) : '—' ?></td></tr>
       <?php endforeach; ?>
       <?php if (!$recientes): ?><tr><td colspan="3" class="text-center text-muted py-4">Aún no hay títulos. Crea el primero desde la sección Títulos.</td></tr><?php endif; ?>
       </tbody>

@@ -21,21 +21,21 @@ require __DIR__ . '/../../includes/header.php';
   <div class="table-responsive">
     <table class="table table-hover mb-0 align-middle">
       <thead class="table-light">
-        <tr><th>#</th><th>Título</th><th>Tipo</th><th>Editorial</th><th class="text-end">Precio</th><th class="text-end">Ventas</th><th>Publicación</th><th class="text-end">Acciones</th></tr>
+        <tr><th>Código</th><th>Título</th><th>Tipo</th><th>Editorial</th><th class="text-end">Precio</th><th class="text-end">Ventas</th><th>Publicación</th><th class="text-end">Acciones</th></tr>
       </thead>
       <tbody>
       <?php foreach ($titulos as $t): ?>
         <tr>
-          <td><?= (int) $t['id_titulo'] ?></td>
+          <td><?= e($t['id_titulo']) ?></td>
           <td class="fw-semibold"><?= e($t['titulo']) ?></td>
           <td><span class="badge text-bg-secondary"><?= e($t['tipo']) ?></span></td>
           <td><?= e($t['nombre_pub']) ?></td>
-          <td class="text-end">RD$ <?= number_format((float) $t['precio'], 2) ?></td>
-          <td class="text-end"><?= (int) $t['ventas_ytd'] ?></td>
-          <td><?= e($t['fecha_pub']) ?></td>
+          <td class="text-end"><?= $t['precio'] !== null ? '$' . number_format((float) $t['precio'], 2) : '—' ?></td>
+          <td class="text-end"><?= $t['total_ventas'] !== null ? number_format((int) $t['total_ventas']) : '—' ?></td>
+          <td><?= e(substr((string) $t['fecha_pub'], 0, 10)) ?></td>
           <td class="text-end text-nowrap">
-            <a href="editar.php?id=<?= (int) $t['id_titulo'] ?>" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i> Editar</a>
-            <a href="eliminar.php?id=<?= (int) $t['id_titulo'] ?>" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Eliminar</a>
+            <a href="editar.php?id=<?= urlencode($t['id_titulo']) ?>" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil"></i> Editar</a>
+            <a href="eliminar.php?id=<?= urlencode($t['id_titulo']) ?>" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Eliminar</a>
           </td>
         </tr>
       <?php endforeach; ?>

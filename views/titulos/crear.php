@@ -26,5 +26,5 @@ $titulo_pagina = 'Nuevo título';
 require __DIR__ . '/../../includes/header.php';
 ?>
 <h1 class="h3 mb-3">Nuevo título</h1>
-<?php $accion = 'Guardar título'; require __DIR__ . '/_form.php'; ?>
+<?php $accion = 'Guardar título'; $esNuevo = true; require __DIR__ . '/_form.php'; ?>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>

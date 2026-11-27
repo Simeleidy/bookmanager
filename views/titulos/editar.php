@@ -8,7 +8,7 @@ require_once __DIR__ . '/../../includes/helpers.php';
 $db = (new Database())->getConnection();
 $tituloModel = new Titulo($db);
 
-$id = (int) ($_GET['id'] ?? 0);
+$id = trim((string) ($_GET['id'] ?? ''));
 $titulo = $tituloModel->getById($id);
 if (!$titulo) {
     flash('danger', 'El título solicitado no existe.');
@@ -21,6 +21,7 @@ $errores = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $datos = $_POST;
+    $datos['id_titulo'] = $id;
     if ($tituloModel->update($id, $_POST)) {
         flash('success', 'Título actualizado correctamente.');
         redirigir('index.php');
@@ -33,6 +34,6 @@ $pagina = 'titulos';
 $titulo_pagina = 'Editar título';
 require __DIR__ . '/../../includes/header.php';
 ?>
-<h1 class="h3 mb-3">Editar título #<?= $id ?></h1>
-<?php $accion = 'Guardar cambios'; require __DIR__ . '/_form.php'; ?>
+<h1 class="h3 mb-3">Editar título <?= e($id) ?></h1>
+<?php $accion = 'Guardar cambios'; $esNuevo = false; require __DIR__ . '/_form.php'; ?>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>

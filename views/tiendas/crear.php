@@ -25,5 +25,5 @@ $titulo_pagina = 'Nueva tienda';
 require __DIR__ . '/../../includes/header.php';
 ?>
 <h1 class="h3 mb-3">Nueva tienda</h1>
-<?php $accion = 'Guardar tienda'; require __DIR__ . '/_form.php'; ?>
+<?php $accion = 'Guardar tienda'; $esNuevo = true; require __DIR__ . '/_form.php'; ?>
 <?php require __DIR__ . '/../../includes/footer.php'; ?>
